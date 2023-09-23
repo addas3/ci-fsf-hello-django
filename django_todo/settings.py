@@ -1,3 +1,4 @@
+import os
 """
 Django settings for django_todo project.
 
@@ -29,12 +30,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hw4!s!(lojh0ssb6!%c2x)o0r+6*$+0o0v4=bw-hj0se9o8+u)'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-hw4!s!(lojh0ssb6!%c2x)o0r+6*$+0o0v4=bw-hj0se9o8+u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-addas3-cifsfhellodjango-p98m4poesdn.ws-eu104.gitpod.io']
+# ALLOWED_HOSTS = ['8000-addas3-cifsfhellodjango-p98m4poesdn.ws-eu104.gitpod.io']
+
+ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
 
 # Application definition
@@ -91,6 +94,7 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 # }
 
 DATABASES = {
+    # 'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
 
